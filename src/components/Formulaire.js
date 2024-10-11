@@ -90,7 +90,7 @@ const Formulaire = () => {
 
                 <input
                     type="text"
-                    placeholder="Ville"
+                    placeholder="Ville "
                     value={ville}
                     onChange={(e) => setVille(e.target.value)}
                 />
