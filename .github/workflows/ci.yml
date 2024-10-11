@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20' # Utilise la version de Node.js que ton projet nécessite
+          node-version: '20' # Utilisez la version de Node.js que votre projet nécessite
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -30,3 +30,11 @@ jobs:
       # Step 4: Run tests
       - name: Run tests
         run: npm test -- --watchAll=false
+
+      # Step 5: Fail the job if tests fail
+      - name: Check test results
+        run: |
+          if [ $? -ne 0 ]; then
+            echo "Tests failed, refusing commit."
+            exit 1
+          fi
