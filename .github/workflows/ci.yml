@@ -1,0 +1,40 @@
+name: CI for React Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20' # Utilisez la version de Node.js que votre projet nécessite
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      - name: Run tests
+        run: npm test -- --watchAll=false
+
+      # Step 5: Fail the job if tests fail
+      - name: Check test results
+        run: |
+          if [ $? -ne 0 ]; then
+            echo "Tests failed, refusing commit."
+            exit 1
+          fi

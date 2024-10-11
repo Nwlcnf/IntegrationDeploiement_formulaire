@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/IntegrationDeploiement_formulaire/static/css/main.e8dc4052.css",
+    "main.js": "/IntegrationDeploiement_formulaire/static/js/main.fdbcbcdb.js",
+    "static/js/453.6d43e54f.chunk.js": "/IntegrationDeploiement_formulaire/static/js/453.6d43e54f.chunk.js",
+    "index.html": "/IntegrationDeploiement_formulaire/index.html",
+    "main.e8dc4052.css.map": "/IntegrationDeploiement_formulaire/static/css/main.e8dc4052.css.map",
+    "main.fdbcbcdb.js.map": "/IntegrationDeploiement_formulaire/static/js/main.fdbcbcdb.js.map",
+    "453.6d43e54f.chunk.js.map": "/IntegrationDeploiement_formulaire/static/js/453.6d43e54f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e8dc4052.css",
+    "static/js/main.fdbcbcdb.js"
+  ]
+}
