@@ -16,7 +16,7 @@ describe('Formulaire component', () => {
     });
 
     test('renders form fields', () => {
-        expect(screen.getByPlaceholderText(/Nom/i)).toBeInTheDocument();
+        expect(screen.getAllByPlaceholderText(/Nom/i)[0]).toBeInTheDocument(); // First element
         expect(screen.getByPlaceholderText(/Prénom/i)).toBeInTheDocument();
         expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
         expect(screen.getByPlaceholderText(/Date/i)).toBeInTheDocument();
@@ -25,23 +25,28 @@ describe('Formulaire component', () => {
     });
 
     test('shows error messages for invalid inputs', () => {
-        fireEvent.change(screen.getByPlaceholderText(/Nom/i), { target: { value: '123' } });
+        fireEvent.change(screen.getAllByPlaceholderText(/Nom/i)[0], { target: { value: '123' } });
         fireEvent.change(screen.getByPlaceholderText(/Prénom/i), { target: { value: '' } });
         fireEvent.change(screen.getByPlaceholderText(/Email/i), { target: { value: 'invalidEmail' } });
-        fireEvent.change(screen.getByPlaceholderText(/Date/i), { target: { value: '2005-01-01' } }); // Moins de 18 ans
+        fireEvent.change(screen.getByPlaceholderText(/Date/i), { target: { value: '2010-01-01' } }); // Moins de 18 ans
         fireEvent.change(screen.getByPlaceholderText(/Ville/i), { target: { value: 'City123' } });
         fireEvent.change(screen.getByPlaceholderText(/Code Postal/i), { target: { value: '1234' } });
-
+    
         fireEvent.click(screen.getByRole('button', { name: /S'inscrire/i }));
-
-        expect(screen.getByText(/Nom, prénom ou ville invalide/i)).toBeInTheDocument();
+    
+        // Flexible matcher for 18 years error message
+        expect(screen.getByText((content, element) => 
+            content.includes('Vous devez avoir au moins 18 ans'))).toBeInTheDocument();
+    
+        expect(screen.getByText(/Nom invalide/i)).toBeInTheDocument();
         expect(screen.getByText(/Email invalide/i)).toBeInTheDocument();
-        expect(screen.getByText(/Vous devez avoir au moins 18 ans/i)).toBeInTheDocument();
+        expect(screen.getByText(/Ville invalide/i)).toBeInTheDocument();
         expect(screen.getByText(/Code postal invalide/i)).toBeInTheDocument();
     });
-
+    
+    
     test('submits form with valid inputs', () => {
-        fireEvent.change(screen.getByPlaceholderText(/Nom/i), { target: { value: 'John' } });
+        fireEvent.change(screen.getAllByPlaceholderText(/Nom/i)[0], { target: { value: 'John' } }); // First element
         fireEvent.change(screen.getByPlaceholderText(/Prénom/i), { target: { value: 'Doe' } });
         fireEvent.change(screen.getByPlaceholderText(/Email/i), { target: { value: 'john.doe@example.com' } });
         fireEvent.change(screen.getByPlaceholderText(/Date/i), { target: { value: '2000-01-01' } });
@@ -57,7 +62,7 @@ describe('Formulaire component', () => {
     test('disables button when form inputs are invalid', () => {
         expect(screen.getByRole('button', { name: /S'inscrire/i })).toBeDisabled();
         
-        fireEvent.change(screen.getByPlaceholderText(/Nom/i), { target: { value: 'John' } });
+        fireEvent.change(screen.getAllByPlaceholderText(/Nom/i)[0], { target: { value: 'John' } }); // First element
         fireEvent.change(screen.getByPlaceholderText(/Prénom/i), { target: { value: 'Doe' } });
         fireEvent.change(screen.getByPlaceholderText(/Email/i), { target: { value: 'john.doe@example.com' } });
         fireEvent.change(screen.getByPlaceholderText(/Date/i), { target: { value: '2000-01-01' } });

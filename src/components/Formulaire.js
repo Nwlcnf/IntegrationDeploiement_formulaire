@@ -5,6 +5,7 @@ import './Formulaire.css';
 import ListeInscrit from './ListeInscrit';
 
 const Formulaire = () => {
+    console.log("form loaded");
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
     const [email, setEmail] = useState('');
@@ -83,6 +84,7 @@ const Formulaire = () => {
 
                 <input
                     type="date"
+                    placeholder="Date"
                     value={dateNaissance}
                     onChange={(e) => setDateNaissance(e.target.value)}
                 />
