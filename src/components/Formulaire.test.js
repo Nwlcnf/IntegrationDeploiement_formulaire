@@ -28,7 +28,7 @@ describe('Formulaire component', () => {
         fireEvent.change(screen.getAllByPlaceholderText(/Nom/i)[0], { target: { value: '123' } });
         fireEvent.change(screen.getByPlaceholderText(/Prénom/i), { target: { value: '' } });
         fireEvent.change(screen.getByPlaceholderText(/Email/i), { target: { value: 'invalidEmail' } });
-        fireEvent.change(screen.getByPlaceholderText(/Date/i), { target: { value: '2005-01-01' } }); // Moins de 18 ans
+        fireEvent.change(screen.getByPlaceholderText(/Date/i), { target: { value: '2010-01-01' } }); // Moins de 18 ans
         fireEvent.change(screen.getByPlaceholderText(/Ville/i), { target: { value: 'City123' } });
         fireEvent.change(screen.getByPlaceholderText(/Code Postal/i), { target: { value: '1234' } });
     
