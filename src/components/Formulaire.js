@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { validateEmail, validateName, validatePostalCode, validateDateOfBirth, validateCity } from '../utils/validation';
 import { toast } from 'react-toastify';
+import './Formulaire.css';
+import ListeInscrit from './ListeInscrit';
 
 const Formulaire = () => {
     const [nom, setNom] = useState('');
@@ -51,7 +53,9 @@ const Formulaire = () => {
     const isFormValid = nom && prenom && email && dateNaissance && ville && codePostal;
 
     return (
-        <div>
+        <div className="form">
+                 <h2>Formulaire d'inscription</h2>
+
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -103,13 +107,7 @@ const Formulaire = () => {
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <button type="submit" disabled={!isFormValid}>S'inscrire</button>
             </form>
-
-            <h2>Liste des inscrits</h2>
-            <ul>
-                {users.map((user, index) => (
-                    <li key={index}>{`${user.nom} ${user.prenom} - ${user.email}`}</li>
-                ))}
-            </ul>
+            <ListeInscrit liste = {users}/>
         </div>
     );
 };
