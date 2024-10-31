@@ -4,7 +4,8 @@ export const validateEmail = (email) => {
 };
 
 export const validateName = (name) => {
-    return /^[a-zA-ZÀ-ÿ' -]+$/.test(name);
+    const nameRegex = /^[A-Za-zÀ-ÿ' -]+$/;
+    return name.trim() !== '' && nameRegex.test(name);
 };
 
 export const validateCity = (city) => {
@@ -15,15 +16,16 @@ export const validatePostalCode = (codePostal) => {
     return /^[0-9]{5}$/.test(codePostal);
 };
 
-export const validateDateOfBirth = (dateNaissance) => {
-    const birthDate = new Date(dateNaissance);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+export const validateDateOfBirth = (date) => {
+    const dateOfBirth = new Date(date);
+    if (isNaN(dateOfBirth.getTime())) {
+        return false;
     }
+    const today = new Date();
+    const age = today.getFullYear() - dateOfBirth.getFullYear();
+    const isUnder18 = age < 18 || (age === 18 && today < new Date(dateOfBirth.setFullYear(dateOfBirth.getFullYear() + 18)));
 
-    return age >= 18;
+    return !isUnder18;
 };
+
 

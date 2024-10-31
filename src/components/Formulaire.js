@@ -39,7 +39,7 @@ const Formulaire = () => {
         // Ajout de l'utilisateur
         const newUser = { nom, prenom, email, dateNaissance, ville, codePostal };
         setUsers([...users, newUser]);
-        toast.success('Inscription réussie !');
+        toast.success('Inscription réussie');
 
         // Réinitialisation des champs
         setNom('');
