@@ -56,15 +56,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Authenticate with npm
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       # Step 4: Build the project
       - name: Build the project
         run: npm run build-npm  
         
       # Step 5: Publish to npm
+
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  
-        run: npm publish --access public  
+        run: npm publish --access public
+
 
       # Step 6: Deploy to GitHub Pages 
       - name: Deploy to GitHub Pages
