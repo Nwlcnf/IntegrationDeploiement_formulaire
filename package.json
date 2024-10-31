@@ -1,6 +1,6 @@
 {
   "name": "@nwlcnf/formulaire-inscription",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "main": "dist/index.js",
   "homepage": "https://Nwlcnf.github.io/IntegrationDeploiement_formulaire",
